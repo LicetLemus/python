@@ -53,12 +53,3 @@ def entrada():
             break
 
 entrada()
-
-# while True:
-#     confirmación = input("Desea continuar ingresando información (s/n): ")
-
-#     if confirmación == 's':
-#         registrar_estudiante()
-#     else:
-#         print("Gracias por registrar los estudiantes")
-#         entrada()
