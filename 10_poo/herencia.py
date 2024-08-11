@@ -20,4 +20,4 @@ class Mascota(Animal):
         return f"Especie: {self.especie}, Edad: {self.edad}, Nombre: {self.nombre}"
         
 mascota1 = Mascota('Felino', 5, 'Mishi')
-print(mascota1.__str__())
+print(mascota1.info())
