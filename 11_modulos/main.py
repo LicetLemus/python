@@ -14,6 +14,7 @@ if __name__ == '__main__': # si el modulo se ejecuta como principal
     print(ahora)
 
     modulo1.saludar()
+    # modulo1.imprimir_variable()
 
     print(__name__) # __name__ es una variable especial que nos dice el nombre del modulo en el que estamos trabajando
 

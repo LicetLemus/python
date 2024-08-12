@@ -3,7 +3,8 @@
 
 def saludar():
     print('Hola, soy el módulo 1')
-    
-    
-# print(variable_global)
+
+# def imprimir_variable():
+#     print(variable_global)
+
 print(__name__)
