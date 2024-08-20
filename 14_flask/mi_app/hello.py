@@ -14,8 +14,9 @@ app = Flask(__name__) # __name__ is a special variable in Python that is the nam
 @app.route('/')
 def index():
     # return '<h1>Página de Inicio</h1>'
-    name = ''
-    return render_template('index.html', name=name)
+    name = 'Licet'
+    friends = ['Alejandra', 'Luis', 'Pedro', 'Juan']
+    return render_template('index.html', name = name, friends = friends)
 
 #string <string:name>
 #int <int:id>
