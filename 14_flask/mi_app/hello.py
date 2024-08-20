@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, render_template
+
 
 
 app = Flask(__name__) # __name__ is a special variable in Python that is the name of the module, app of the Flask. Module name is __main__ when it is run from the command line.
@@ -12,8 +13,9 @@ app = Flask(__name__) # __name__ is a special variable in Python that is the nam
 @app.route('/index')
 @app.route('/')
 def index():
-    return '<h1>Página de Inicio</h1>'
-
+    # return '<h1>Página de Inicio</h1>'
+    name = ''
+    return render_template('index.html', name=name)
 
 #string <string:name>
 #int <int:id>
