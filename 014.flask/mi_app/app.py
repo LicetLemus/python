@@ -1,7 +1,5 @@
 from flask import Flask, render_template
 
-
-
 app = Flask(__name__) # __name__ is a special variable in Python that is the name of the module, app of the Flask. Module name is __main__ when it is run from the command line.
 
 # for execute of the server you need to run the next command: flask --app hello run
@@ -14,7 +12,12 @@ app = Flask(__name__) # __name__ is a special variable in Python that is the nam
 def today(date):
     return date.strftime('%d-%m-%y')
 
+#functions personalize
+
 from datetime import datetime
+
+def repeat(s, n):
+    return s * n
 
 @app.route('/index')
 @app.route('/')
@@ -27,7 +30,9 @@ def index():
         'index.html', 
         name = name, 
         friends = friends, 
-        date = date)
+        date = date,
+        repeat = repeat
+        )
 
 #string <string:name>
 #int <int:id>
@@ -36,14 +41,14 @@ def index():
 #uuid <uuid:id>
 @app.route('/hello')
 @app.route('/hello/<string:name>')
-@app.route('/hello/<string:name>/<int:age>')
-def hello(name = None, age = None):
-    if name == None and age == None:
-        return '<h1>Hola, Mundo!</h1>'
-    elif name != None and age == None:
-        return f'<h1>Hola, {name}!</h1>'
-    else:
-        return f'<h1>Hola, {name}! tienes {age} años y el doble de tu edad es: {age * 2}</h1>'
+@app.route('/hello/<string:name>/<int:age>/<email>')
+def hello(name = None, age = None, email = None):
+    my_date = {
+        'name': name,
+        'age': age,
+        'email': email
+    }
+    return render_template('hello.html', data = my_date)
 
 
 # we can obtain values from the URL <name>
