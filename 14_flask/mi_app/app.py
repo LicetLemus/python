@@ -9,6 +9,12 @@ app = Flask(__name__) # __name__ is a special variable in Python that is the nam
 # for execute of debug mode you need to run the next command: flask --app hello --debug run
 # ruotes and view functions
 
+# filter 
+@app.add_template_filter
+def today(date):
+    return date.strftime('%d-%m-%y')
+
+from datetime import datetime
 
 @app.route('/index')
 @app.route('/')
@@ -16,7 +22,12 @@ def index():
     # return '<h1>Página de Inicio</h1>'
     name = 'Licet'
     friends = ['Alejandra', 'Luis', 'Pedro', 'Juan']
-    return render_template('index.html', name = name, friends = friends)
+    date = datetime.now()
+    return render_template(
+        'index.html', 
+        name = name, 
+        friends = friends, 
+        date = date)
 
 #string <string:name>
 #int <int:id>
@@ -45,3 +56,7 @@ def code(code):
     return f'''
             <p>Hola, ¿como estas?</p>
             <code>El código es: {escape(code)}</code>'''
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

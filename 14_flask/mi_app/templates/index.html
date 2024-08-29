@@ -1,27 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi sitio web</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% block title %}Página de Inicio{% endblock %}
+
+{% block content %}
     <h1>Bienvenido a mi sitio web</h1>
+    
     {% if name %}
-    <p>Hola, {{name}}</p>
+    <p>Hola, {{ name | upper }}</p>
     {% else %}
     <p>Hola, desconocido</p>
     {% endif %}
 
-
     <h2>Lista de amigos</h2>
     <ul>
-
-        {% for friend in friends %}
-        <li>{{friend}}</li>
+        {% for friend in friends | reverse %}
+        <li>{{ friend }}</li>
         {% endfor %}
-
     </ul>
-</body>
-</html>
+
+    <p>La fecha de hoy es: {{date | today }}</p>
+{% endblock %}
+
+
 
