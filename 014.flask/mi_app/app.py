@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__) # __name__ is a special variable in Python that is the name of the module, app of the Flask. Module name is __main__ when it is run from the command line.
 
 # for execute of the server you need to run the next command: flask --app hello run
 # debug mode: The server will reload itself each time you make a change in the code.
 # for execute of debug mode you need to run the next command: flask --app hello --debug run
-# ruotes and view functions
+# ruotes and views functions
 
 # filter 
 @app.add_template_filter
@@ -19,10 +19,12 @@ from datetime import datetime
 def repeat(s, n):
     return s * n
 
-@app.route('/index')
 @app.route('/')
 def index():
     # return '<h1>Página de Inicio</h1>'
+    print(url_for('index'))
+    print(url_for('hello'))
+    print(url_for('code', code = 'print("hola")')) 
     name = 'Licet'
     friends = ['Alejandra', 'Luis', 'Pedro', 'Juan']
     date = datetime.now()
