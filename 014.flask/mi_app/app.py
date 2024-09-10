@@ -1,7 +1,9 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__) # __name__ is a special variable in Python that is the name of the module, app of the Flask. Module name is __main__ when it is run from the command line.
-
+app.config.from_mapping(
+    SECRET_KEY = 'dev'
+)
 # for execute of the server you need to run the next command: flask --app hello run
 # debug mode: The server will reload itself each time you make a change in the code.
 # for execute of debug mode you need to run the next command: flask --app hello --debug run
@@ -64,6 +66,45 @@ def code(code):
             <p>Hola, ¿como estas?</p>
             <code>El código es: {escape(code)}</code>'''
 
+
+#crear formulario con wtform : se debe installar pip install flask-wtf
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, Length
+
+class Register_user(FlaskForm):
+    username = StringField("Nombre de usuario: ", validators=[DataRequired(), Length(min=4, max=25)])
+    password = PasswordField("Contraseña: ", validators=[DataRequired(), Length(min=6, max=40)])
+    submit = SubmitField("Registrar ")
+
+
+#registrar usuarios
+@app.route('/auth/register', methods = ['GET', 'POST'])
+def register():
+    form = Register_user()
+    print(request.form)
+    
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        return f'Nombre de usuario: {username}, contraseña: {password}'
+    
+    
+        
+    
+    # if request.method == 'POST':
+    #     username = request.form['username']
+    #     password = request.form['password']
+        
+    #     if len(username) >= 4 and len(username) <= 25 and len(password) >= 6 and len(password) <= 40:
+    #         return f'Nombre de usuario: {username}, contraseña: {password}'
+    #     else:
+    #         error = """ Nombre usuario debe tener entre 4 y 25 caracteres
+    #         y la constraseña debe tener entre 6 y 40 caracteres
+    #         """
+    #     return render_template('auth/register.html', form = form, error = error)
+    
+    return render_template('auth/register.html', form = form)
 
 if __name__ == '__main__':
     app.run(debug=True)
