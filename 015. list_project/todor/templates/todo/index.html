@@ -1,9 +1,10 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
 
+{% block content %}
 <section class="container-fuid">
   <nav class="navbar">
     <h1>{% block title %} Lista de Tareas {% endblock %}</h1>
-    <a href="" class="btn btn-sucess"></a>
+    <a href="{{ url_for('todo.create') }}" class="btn btn-success">Nuevo</a>
   </nav>
 
   <table class="table">
