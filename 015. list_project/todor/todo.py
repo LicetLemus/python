@@ -6,9 +6,6 @@ from todor import db
 
 bp = Blueprint("todo", __name__, url_prefix="/todo")
 
-
-
-
 @bp.route("/list")
 @login_required  # no puede ingresar con la url sin estar login
 def index():
@@ -50,3 +47,14 @@ def update(id):
         db.session.commit()
         return redirect(url_for("todo.index"))
     return render_template('todo/update.html', todo = todo)
+
+
+@bp.route("/delete/<int:id>")
+@login_required 
+def delete(id):
+
+    todo = get_todo(id)
+    
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for("todo.index"))
